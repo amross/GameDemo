@@ -24,10 +24,22 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    symbol.cpp \
+    card.cpp \
+    deck.cpp \
+    scorer.cpp \
+    gameengine.cpp \
+    gameboard.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    symbol.h \
+    card.h \
+    deck.h \
+    scorer.h \
+    gameengine.h \
+    gameboard.h
 
 FORMS += \
         mainwindow.ui
@@ -36,3 +48,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Notes.txt
