@@ -4,6 +4,7 @@ Demonstrate C++ programming skills
 
 Challenges
 Lack of QT experience with IDE or API
+Limited time
 
 Approach
 Concentrate on C++ design
@@ -26,7 +27,6 @@ Match check will be performed:
 Cards bonus modifier will be applied
 Score Updated with new value
 New random card selected and placed on table (to replace selected one)
-
 Game ends when time runs out
 
 TODO

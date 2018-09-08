@@ -11,4 +11,5 @@ public:
     void Shuffle();
 private:
     QVector<Card> mCards;
+    int getIdx;
 };

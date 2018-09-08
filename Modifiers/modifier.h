@@ -6,5 +6,7 @@ class Modifier
 {
 public:
     Modifier();
+    ~Modifier();
+    Modifier(const Modifier& from);
     Symbol& GetSymbol();
 };

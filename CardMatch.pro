@@ -23,8 +23,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     card.cpp \
     deck.cpp \
     scorer.cpp \
@@ -35,7 +35,7 @@ SOURCES += \
     Modifiers/modifier.cpp
 
 HEADERS += \
-        mainwindow.h \
+    mainwindow.h \
     card.h \
     deck.h \
     scorer.h \
@@ -43,10 +43,11 @@ HEADERS += \
     gameboard.h \
     Symbols/symbol.h \
     Symbols/square.h \
-    Modifiers/modifier.h
+    Modifiers/modifier.h \
+    colour.h
 
 FORMS += \
-        mainwindow.ui
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
