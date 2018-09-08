@@ -12,16 +12,15 @@ public:
        GREEN,
        WHITE
     };
-    Symbol();
-    Symbol(Colour colour);
     virtual ~Symbol(){}
+    virtual Symbol* create() const = 0;
+    virtual Symbol* clone() const = 0;
     virtual void Draw() = 0;
-    Colour GetColour();
 
 protected:
-    QColor qColor;
+    Colour colour;
+    QColor qColour;
 
 private:
-    Colour colour;
 
 };

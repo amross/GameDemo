@@ -31,7 +31,8 @@ SOURCES += \
     gameengine.cpp \
     gameboard.cpp \
     Symbols/symbol.cpp \
-    Symbols/square.cpp
+    Symbols/square.cpp \
+    Modifiers/modifier.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     gameengine.h \
     gameboard.h \
     Symbols/symbol.h \
-    Symbols/square.h
+    Symbols/square.h \
+    Modifiers/modifier.h
 
 FORMS += \
         mainwindow.ui

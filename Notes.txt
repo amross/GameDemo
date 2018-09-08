@@ -1,0 +1,34 @@
+Goals
+Create simple game in QT
+Demonstrate C++ programming skills
+
+Challenges
+Lack of QT experience with IDE or API
+
+Approach
+Concentrate on C++ design
+
+Game idea
+Simple card matching game
+Game starts with n second time limit
+Card deck will consist of n cards each with and associated shape and colour and bonus
+Cards shape and value will be shown on the face of the card face and bonus on the back
+All cards start face down on table (bonus revealed)
+A randomly selected card will be picked from full deck as the card requiring matching
+Single click will flip card to reveal face
+A second click will select the card
+selected card will be removed from table and and moved to match check
+Match check will be performed:
+    single point awarded for either colour or shape match
+    3 points if exact match
+    -2 points for no match
+    2 second time bonus for any match
+Cards bonus modifier will be applied
+Score Updated with new value
+New random card selected and placed on table (to replace selected one)
+
+Game ends when time runs out
+
+TODO
+Unit tests
+Document
