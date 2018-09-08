@@ -25,21 +25,23 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    symbol.cpp \
     card.cpp \
     deck.cpp \
     scorer.cpp \
     gameengine.cpp \
-    gameboard.cpp
+    gameboard.cpp \
+    Symbols/symbol.cpp \
+    Symbols/square.cpp
 
 HEADERS += \
         mainwindow.h \
-    symbol.h \
     card.h \
     deck.h \
     scorer.h \
     gameengine.h \
-    gameboard.h
+    gameboard.h \
+    Symbols/symbol.h \
+    Symbols/square.h
 
 FORMS += \
         mainwindow.ui

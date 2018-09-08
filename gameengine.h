@@ -1,11 +1,7 @@
-#ifndef GAMEENGINE_H
-#define GAMEENGINE_H
-
+#pragma once
 
 class GameEngine
 {
 public:
     GameEngine();
 };
-
-#endif // GAMEENGINE_H

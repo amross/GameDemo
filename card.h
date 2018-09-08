@@ -1,11 +1,7 @@
-#ifndef CARD_H
-#define CARD_H
-
+#pragma once
 
 class Card
 {
 public:
     Card();
 };
-
-#endif // CARD_H

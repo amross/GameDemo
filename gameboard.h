@@ -1,11 +1,7 @@
-#ifndef GAMEBOARD_H
-#define GAMEBOARD_H
-
+#pragma once
 
 class GameBoard
 {
 public:
     GameBoard();
 };
-
-#endif // GAMEBOARD_H

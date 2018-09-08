@@ -1,11 +1,7 @@
-#ifndef SCORER_H
-#define SCORER_H
-
+#pragma once
 
 class Scorer
 {
 public:
     Scorer();
 };
-
-#endif // SCORER_H
