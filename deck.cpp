@@ -1,7 +1,6 @@
 #include "deck.h"
 
 #include <Symbols/square.h>
-#include <colour.h>
 #include <QList>
 #include <iostream>
 #include <cstdlib>
@@ -10,17 +9,17 @@
 
 Deck::Deck()
 {
-    static const QList<Colour::Colours> colourList =
+    static const QList<Qt::GlobalColor> colourList =
     {
-        Colour::RED,
-        Colour::BLUE,
-        Colour::GREEN,
-        Colour::WHITE
+        Qt::red,
+        Qt::blue,
+        Qt::green,
+        Qt::white
     };
     qInfo( "Construct Deck" );
     Square faceSymbol;
     Modifier modifier;
-    foreach(Colour::Colours colour, colourList )
+    foreach(Qt::GlobalColor colour, colourList )
     {
         faceSymbol.colour = colour;
         Card *pNewCard = new Card(faceSymbol, modifier);

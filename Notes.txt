@@ -40,6 +40,7 @@ More shapes and colours
 More modifiers
 Time limit
 Hi score
+New decks
 
 TODO
 Unit tests

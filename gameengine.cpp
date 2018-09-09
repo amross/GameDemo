@@ -1,3 +1,4 @@
+#include "deck.h"
 #include "gameengine.h"
 #include <QDebug>
 
@@ -9,6 +10,20 @@ GameEngine::GameEngine()
 GameEngine::GameEngine(int clicksAllowed)
     : initialClicks(clicksAllowed)
 {
+    Deck *pDeck =  new Deck();
+    pDeck->Shuffle();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    pDeck->GetCard();
+    Qt::black;
 }
 
 GameEngine::~GameEngine()
@@ -18,12 +33,12 @@ GameEngine::~GameEngine()
 
 void GameEngine::start()
 {
+    qInfo() << "Game started";
     score = 0;
     clicksRemaining = initialClicks;
     clicksChanged(clicksRemaining);
     scoreChanged(score);
     inProgress = true;
-    qInfo() << "Game started";
 }
 
 void GameEngine::cardPicked(const CardSlot& cardSlot)

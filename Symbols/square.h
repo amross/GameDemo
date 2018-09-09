@@ -1,7 +1,7 @@
 #pragma once
 
 #include "symbol.h"
-#include "colour.h"
+#include <QColor>
 
 class Square: public Symbol
 {
@@ -13,7 +13,7 @@ public:
     void Draw() override;
     operator QString() const override;
 
-    Colour::Colours colour;
+    Qt::GlobalColor colour;
 
 protected:
     QColor qColour;

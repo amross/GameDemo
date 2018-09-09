@@ -24,7 +24,6 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
     card.cpp \
     deck.cpp \
     scorer.cpp \
@@ -36,7 +35,6 @@ SOURCES += \
     cardslot.cpp
 
 HEADERS += \
-    mainwindow.h \
     card.h \
     deck.h \
     scorer.h \
@@ -44,7 +42,6 @@ HEADERS += \
     Symbols/symbol.h \
     Symbols/square.h \
     Modifiers/modifier.h \
-    colour.h \
     gamewindow.h \
     cardslot.h
 
