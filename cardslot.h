@@ -16,8 +16,6 @@ public:
     void AddCard(Card* pCard);
     Card* RemoveCard(void);
 
-    QLabel *pLabel;
-
 protected:
     void mousePressEvent(QMouseEvent* event) override;
 

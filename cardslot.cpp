@@ -6,9 +6,6 @@ CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
 {
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
-    pLabel = new QLabel;
-    pLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
-    pLabel->setAlignment(Qt::AlignCenter);
 }
 
 CardSlot::~CardSlot()
@@ -32,6 +29,7 @@ void CardSlot::AddCard(Card* pCard)
 {
     qInfo() << "Add Card: " << *pCard;
     this->pCard = pCard;
+    this->setText(*pCard);
 }
 
 Card* CardSlot::RemoveCard()
