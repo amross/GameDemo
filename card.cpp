@@ -1,5 +1,4 @@
 #include "card.h"
-
 #include <QDebug>
 
 Card::Card()
@@ -16,9 +15,7 @@ Card::Card(const Symbol &faceSymbol, const Modifier &modifier)
     pFaceSymbol = faceSymbol.clone();
 }
 
-/**
-  * Overloading operator for debugging purposes
-  */
+// Overloading operator for debugging purposes
 Card::operator QString() const
 {
     return desc;

@@ -2,10 +2,22 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QPushButton>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+
+
+
+
+
+
+
+
+
     Deck *pDeck =  new Deck();
     pDeck->Shuffle();
     pDeck->GetCard();

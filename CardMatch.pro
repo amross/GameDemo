@@ -29,10 +29,11 @@ SOURCES += \
     deck.cpp \
     scorer.cpp \
     gameengine.cpp \
-    gameboard.cpp \
     Symbols/symbol.cpp \
     Symbols/square.cpp \
-    Modifiers/modifier.cpp
+    Modifiers/modifier.cpp \
+    gamewindow.cpp \
+    cardslot.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -40,11 +41,12 @@ HEADERS += \
     deck.h \
     scorer.h \
     gameengine.h \
-    gameboard.h \
     Symbols/symbol.h \
     Symbols/square.h \
     Modifiers/modifier.h \
-    colour.h
+    colour.h \
+    gamewindow.h \
+    cardslot.h
 
 FORMS += \
     mainwindow.ui

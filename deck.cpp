@@ -39,7 +39,7 @@ Card Deck::GetCard()
     }
     Card card = mCards[getIdx];
     --getIdx;
-    qInfo() << "Get card" << card;
+    qInfo() << "Got card" << card;
 
     return card;
 }
