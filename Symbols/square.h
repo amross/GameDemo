@@ -2,19 +2,19 @@
 
 #include "symbol.h"
 #include <QColor>
+#include <QPixmap>
 
 class Square: public Symbol
 {
 public:
     Square();
-    Square (Square const &);
-    Square* create() const override;
-    Square* clone() const override;
-    void Draw() override;
+    virtual ~Square() override = default;
+    Square* Create() const override;
+    Square* Clone() const override;
+    void Draw(QPainter& paint) override;
     operator QString() const override;
 
     Qt::GlobalColor color;
 
-protected:
-    QColor qColour;
+private:
 };

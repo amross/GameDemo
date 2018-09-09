@@ -28,7 +28,6 @@ SOURCES += \
     deck.cpp \
     scorer.cpp \
     gameengine.cpp \
-    Symbols/symbol.cpp \
     Symbols/square.cpp \
     Modifiers/modifier.cpp \
     gamewindow.cpp \

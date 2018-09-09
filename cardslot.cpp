@@ -1,11 +1,13 @@
 #include "cardslot.h"
 #include <QDebug>
+#include <QPainter>
 
 CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     : QLabel(parent)
 {
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
+    setScaledContents(true);
 }
 
 CardSlot::~CardSlot()
@@ -29,7 +31,12 @@ void CardSlot::AddCard(Card* pCard)
 {
     qInfo() << "Add Card: " << *pCard;
     this->pCard = pCard;
-    this->setText(*pCard);
+
+    QPixmap pix(60, 100);
+    pix.fill(Qt::black);
+    QPainter paint(&pix);
+    this->pCard->Draw(paint);
+    setPixmap(pix);
 }
 
 Card* CardSlot::RemoveCard()

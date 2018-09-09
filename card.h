@@ -13,6 +13,7 @@ public:
     void FaceUp();
     void FaceDown();
     bool IsFaceUp();
+    void Draw(QPainter& paint);
     operator QString() const ;
 
 private:

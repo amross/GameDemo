@@ -1,5 +1,6 @@
 #include "card.h"
 #include <QDebug>
+#include <QPainter>
 
 Card::Card()
 {
@@ -13,7 +14,7 @@ Card::Card(const Symbol &faceSymbol, const Modifier &modifier)
     desc = "Card: ";
     desc.append(QString(faceSymbol));
     this->modifier = modifier;
-    pFaceSymbol = faceSymbol.clone();
+    pFaceSymbol = faceSymbol.Clone();
 }
 
 void Card::Flip()
@@ -37,6 +38,14 @@ void Card::FaceDown()
 bool Card::IsFaceUp()
 {
     return faceUp;
+}
+
+void Card::Draw(QPainter& paint)
+{
+    QRectF shape(5, 5, paint.device()->width() - 10, paint.device()->height() - 10);
+    QBrush brush(Qt::white);
+    paint.fillRect(shape, brush);
+    pFaceSymbol->Draw(paint);
 }
 
 // Overloading operator for debugging purposes
