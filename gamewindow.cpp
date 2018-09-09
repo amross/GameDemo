@@ -51,6 +51,7 @@
 #include <QtWidgets>
 
 #include "cardslot.h"
+#include "gameengine.h"
 #include "gamewindow.h"
 
 GameWindow::GameWindow()
@@ -67,9 +68,11 @@ GameWindow::GameWindow()
     quitButton = new QPushButton(tr("&Quit"));
     quitButton->setFocusPolicy(Qt::NoFocus);
 
+    CardSlot *pMatcherSlot = new CardSlot();
+    GameEngine *pGameEngine = new GameEngine();
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(createLabel(tr("MATCH")), 0, 0);
-    layout->addWidget(nextPieceLabel, 1, 0);
+    layout->addWidget(pMatcherSlot, 1, 0);
     layout->addWidget(createLabel(tr("SCORE")), 2, 0);
     layout->addWidget(scoreLcd, 3, 0);
     layout->addWidget(startButton, 4, 0);
@@ -80,13 +83,13 @@ GameWindow::GameWindow()
         {
             CardSlot *pSlot = new CardSlot();
             layout->addWidget(pSlot, y, x + 1);
-            connect(pSlot, SIGNAL(clicked()), scoreLcd, SLOT(display(int)));
+            connect(pSlot, SIGNAL(clicked(const CardSlot&)), pGameEngine, SLOT(cardPicked(const CardSlot&)));
         }
     }
     setLayout(layout);
 
     //    connect(startButton, SIGNAL(clicked()), slot[0], SLOT(start()));
-        connect(quitButton , SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(quitButton , SIGNAL(clicked()), qApp, SLOT(quit()));
     //    connect(slot[0], SIGNAL(scoreChanged(int)), scoreLcd, SLOT(display(int)));
 
 

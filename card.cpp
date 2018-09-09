@@ -3,7 +3,7 @@
 
 Card::Card()
 {
-    qInfo( "Construct Card" );
+    qInfo() << "Construct Card";
 }
 
 Card::Card(const Symbol &faceSymbol, const Modifier &modifier)

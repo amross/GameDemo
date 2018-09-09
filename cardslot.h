@@ -1,6 +1,8 @@
 #ifndef CARDSLOT_H
 #define CARDSLOT_H
 
+#include "card.h"
+
 #include <QLabel>
 
 class CardSlot : public QLabel {
@@ -11,6 +13,7 @@ public:
     ~CardSlot() override;
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
+
     QLabel *pLabel;
 
 protected:
@@ -18,9 +21,10 @@ protected:
 
 private:
     enum { BoardWidth = 10, BoardHeight = 22 };
+    Card *pCard;
 
 signals:
-    void clicked();
+    void clicked(const CardSlot& card);
 };
 
 #endif

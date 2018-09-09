@@ -8,6 +8,7 @@ CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     pLabel = new QLabel;
     pLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
     pLabel->setAlignment(Qt::AlignCenter);
+pCard = new Card();
 }
 
 CardSlot::~CardSlot()
@@ -17,17 +18,17 @@ CardSlot::~CardSlot()
 
 QSize CardSlot::sizeHint() const
 {
-    return QSize(BoardWidth * 15 + frameWidth() * 2,
-                 BoardHeight * 15 + frameWidth() * 2);
+    int width = BoardWidth * 15 + frameWidth() * 2;
+    return QSize(width, (width * 3) / 2);
 }
 
 QSize CardSlot::minimumSizeHint() const
 {
-    return QSize(BoardWidth * 5 + frameWidth() * 2,
-                 BoardHeight * 5 + frameWidth() * 2);
+    int width = BoardWidth * 15 + frameWidth() * 2;
+    return QSize(width, (width * 3) / 2);
 }
 
 void CardSlot::mousePressEvent(QMouseEvent* event)
 {
-    emit clicked();
+    emit clicked(*this);
 }
