@@ -13,7 +13,7 @@ public:
     void Draw() override;
     operator QString() const override;
 
-    Qt::GlobalColor colour;
+    Qt::GlobalColor color;
 
 protected:
     QColor qColour;

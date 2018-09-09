@@ -2,15 +2,12 @@
 #include "gameengine.h"
 #include <QDebug>
 
-GameEngine::GameEngine()
-    : GameEngine(20)
-{
-}
 
-GameEngine::GameEngine(int clicksAllowed)
-    : initialClicks(clicksAllowed)
+GameEngine::GameEngine()
 {
-    Deck *pDeck =  new Deck();
+    inProgress = false;
+    initialClicks = 20;
+    pDeck =  new Deck();
     pDeck->Shuffle();
     pDeck->GetCard();
     pDeck->GetCard();
@@ -38,15 +35,37 @@ void GameEngine::start()
     clicksRemaining = initialClicks;
     clicksChanged(clicksRemaining);
     scoreChanged(score);
+    Card* pCard = pDeck->GetCard();
+    pCard->FaceUp();
+    pMatcherSlot->AddCard(pCard);
+    foreach(CardSlot* pSlot, slotList)
+    {
+        pCard = pDeck->GetCard();
+        pCard->FaceDown();
+        pSlot->AddCard(pCard);
+    }
     inProgress = true;
 }
 
-void GameEngine::cardPicked(const CardSlot& cardSlot)
+void GameEngine::cardPicked(CardSlot& cardSlot)
 {
-    qInfo() << "Card Picked";
     if(inProgress)
     {
         clicksChanged(--clicksRemaining);
+        Card* pCard = cardSlot.RemoveCard();
+        qInfo() << "Card Picked: " << *pCard;
+        if(pCard->IsFaceUp() == false)
+        {
+            qInfo() << "Card Flipped: " << *pCard;
+            pCard->Flip();
+            cardSlot.AddCard(pCard);
+        }
+        else
+        {
+            qInfo() << "Card Evaluate: " << *pCard;
+            pDeck->ReturnCard(pCard);
+            cardSlot.AddCard(pDeck->GetCard());
+        }
         scoreChanged(++score);
         if(clicksRemaining <= 0)
         {

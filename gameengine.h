@@ -2,6 +2,7 @@
 
 #include "card.h"
 #include "cardslot.h"
+#include "deck.h"
 
 #include <QFrame>
 
@@ -10,10 +11,12 @@ class GameEngine : public QObject
     Q_OBJECT
 public:
     GameEngine();
-    GameEngine(int clicksAllowed);
     virtual ~GameEngine();
+    CardSlot *pMatcherSlot;
+    QList<CardSlot*> slotList;
 
 private:
+    Deck *pDeck;
     int initialClicks;
     int clicksRemaining;
     int score;
@@ -21,7 +24,7 @@ private:
 
 public slots:
     void start();
-    void cardPicked(const CardSlot& cardSlot);
+    void cardPicked(CardSlot& cardSlot);
 
 signals:
     void scoreChanged(int score);

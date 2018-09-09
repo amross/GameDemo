@@ -1,4 +1,5 @@
 #include "cardslot.h"
+#include <QDebug>
 
 CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     : QLabel(parent)
@@ -8,7 +9,6 @@ CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     pLabel = new QLabel;
     pLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
     pLabel->setAlignment(Qt::AlignCenter);
-pCard = new Card();
 }
 
 CardSlot::~CardSlot()
@@ -26,6 +26,17 @@ QSize CardSlot::minimumSizeHint() const
 {
     int width = BoardWidth * 15 + frameWidth() * 2;
     return QSize(width, (width * 3) / 2);
+}
+
+void CardSlot::AddCard(Card* pCard)
+{
+    qInfo() << "Add Card: " << *pCard;
+    this->pCard = pCard;
+}
+
+Card* CardSlot::RemoveCard()
+{
+    return pCard;
 }
 
 void CardSlot::mousePressEvent(QMouseEvent* event)

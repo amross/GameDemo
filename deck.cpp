@@ -19,9 +19,9 @@ Deck::Deck()
     qInfo( "Construct Deck" );
     Square faceSymbol;
     Modifier modifier;
-    foreach(Qt::GlobalColor colour, colourList )
+    foreach(Qt::GlobalColor color, colourList )
     {
-        faceSymbol.colour = colour;
+        faceSymbol.color = color;
         Card *pNewCard = new Card(faceSymbol, modifier);
         qInfo() << *pNewCard;
         mCards.append(*pNewCard);
@@ -29,18 +29,25 @@ Deck::Deck()
     getIdx = mCards.length() -1;
 }
 
-Card Deck::GetCard()
+Card* Deck::GetCard()
 {
     if(getIdx < 0)
     {
         Shuffle();
         getIdx = mCards.length() -1;
     }
-    Card card = mCards[getIdx];
+    Card* pCard = &mCards[getIdx];
+    pCard->FaceDown();
     --getIdx;
-    qInfo() << "Got card" << card;
+    qInfo() << "Got card from deck" << *pCard;
 
-    return card;
+    return pCard;
+}
+
+void Deck::ReturnCard(Card *pCard)
+{
+    qInfo() << "Return card to deck" << *pCard;
+    /*  Nothing to actually do as we never really removed it from the deck  */
 }
 
 void Deck::Shuffle()

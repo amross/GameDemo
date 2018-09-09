@@ -7,7 +7,8 @@ class Deck
 {
 public:
     Deck();
-    Card GetCard();
+    Card* GetCard();
+    void ReturnCard(Card* pCard);
     void Shuffle();
 private:
     QVector<Card> mCards;

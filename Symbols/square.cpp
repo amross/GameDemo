@@ -30,6 +30,6 @@ void Square::Draw()
 Square::operator QString() const
 {
     QString str = "Square: ";
-    str.append(QString(this->colour));
+    str.append(QString(this->color));
     return str;
 }

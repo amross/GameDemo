@@ -70,15 +70,15 @@ GameWindow::GameWindow()
     quitButton = new QPushButton(tr("&Quit"));
     quitButton->setFocusPolicy(Qt::NoFocus);
 
-    CardSlot *pMatcherSlot = new CardSlot();
-    GameEngine *pGameEngine = new GameEngine(20);
+    GameEngine *pGameEngine = new GameEngine();
+    pGameEngine->pMatcherSlot = new CardSlot();
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(createLabel(tr("CLICK REMAINING")), 0, 0, 1, 2);
     layout->addWidget(clicksLcd, 1, 0, 1, 2);
     layout->addWidget(createLabel(tr("SCORE")), 0, 2, 1, 2);
     layout->addWidget(scoreLcd, 1, 2, 1, 2);
     layout->addWidget(createLabel(tr("MATCH")), 2, 0);
-    layout->addWidget(pMatcherSlot, 3, 0);
+    layout->addWidget(pGameEngine->pMatcherSlot, 3, 0);
     layout->addWidget(startButton, 5, 3);
     layout->addWidget(quitButton, 6, 3);
     for(int x = 1; x < 4; ++x)
@@ -87,7 +87,8 @@ GameWindow::GameWindow()
         {
             CardSlot *pSlot = new CardSlot();
             layout->addWidget(pSlot, y, x);
-            connect(pSlot, SIGNAL(clicked(const CardSlot&)), pGameEngine, SLOT(cardPicked(const CardSlot&)));
+            pGameEngine->slotList.append(pSlot);
+            connect(pSlot, SIGNAL(clicked(CardSlot&)), pGameEngine, SLOT(cardPicked(CardSlot&)));
         }
     }
     setLayout(layout);

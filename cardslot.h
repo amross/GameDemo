@@ -13,6 +13,8 @@ public:
     ~CardSlot() override;
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
+    void AddCard(Card* pCard);
+    Card* RemoveCard(void);
 
     QLabel *pLabel;
 
@@ -21,10 +23,10 @@ protected:
 
 private:
     enum { BoardWidth = 10, BoardHeight = 22 };
-    Card *pCard;
+    Card* pCard;
 
 signals:
-    void clicked(const CardSlot& card);
+    void clicked(CardSlot& card);
 };
 
 #endif
