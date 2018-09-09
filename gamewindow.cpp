@@ -56,12 +56,14 @@
 
 GameWindow::GameWindow()
 {
-    nextPieceLabel = new QLabel;
-    nextPieceLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
-    nextPieceLabel->setAlignment(Qt::AlignCenter);
+    matchLabel = new QLabel;
+    matchLabel->setFrameStyle(QFrame::Box | QFrame::Raised);
+    matchLabel->setAlignment(Qt::AlignCenter);
 
     scoreLcd = new QLCDNumber(5);
     scoreLcd->setSegmentStyle(QLCDNumber::Filled);
+    clicksLcd = new QLCDNumber(5);
+    clicksLcd->setSegmentStyle(QLCDNumber::Filled);
 
     startButton = new QPushButton(tr("&Start"));
     startButton->setFocusPolicy(Qt::NoFocus);
@@ -69,31 +71,34 @@ GameWindow::GameWindow()
     quitButton->setFocusPolicy(Qt::NoFocus);
 
     CardSlot *pMatcherSlot = new CardSlot();
-    GameEngine *pGameEngine = new GameEngine();
+    GameEngine *pGameEngine = new GameEngine(20);
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(createLabel(tr("MATCH")), 0, 0);
-    layout->addWidget(pMatcherSlot, 1, 0);
-    layout->addWidget(createLabel(tr("SCORE")), 2, 0);
-    layout->addWidget(scoreLcd, 3, 0);
-    layout->addWidget(startButton, 4, 0);
-    layout->addWidget(quitButton, 5, 0);
-    for(int x = 0; x < 3; ++x)
+    layout->addWidget(createLabel(tr("CLICK REMAINING")), 0, 0, 1, 2);
+    layout->addWidget(clicksLcd, 1, 0, 1, 2);
+    layout->addWidget(createLabel(tr("SCORE")), 0, 2, 1, 2);
+    layout->addWidget(scoreLcd, 1, 2, 1, 2);
+    layout->addWidget(createLabel(tr("MATCH")), 2, 0);
+    layout->addWidget(pMatcherSlot, 3, 0);
+    layout->addWidget(startButton, 5, 3);
+    layout->addWidget(quitButton, 6, 3);
+    for(int x = 1; x < 4; ++x)
     {
-        for(int y = 0; y < 3; ++y)
+        for(int y = 2; y < 5; ++y)
         {
             CardSlot *pSlot = new CardSlot();
-            layout->addWidget(pSlot, y, x + 1);
+            layout->addWidget(pSlot, y, x);
             connect(pSlot, SIGNAL(clicked(const CardSlot&)), pGameEngine, SLOT(cardPicked(const CardSlot&)));
         }
     }
     setLayout(layout);
 
-    //    connect(startButton, SIGNAL(clicked()), slot[0], SLOT(start()));
+    connect(startButton, SIGNAL(clicked()), pGameEngine, SLOT(start()));
     connect(quitButton , SIGNAL(clicked()), qApp, SLOT(quit()));
-    //    connect(slot[0], SIGNAL(scoreChanged(int)), scoreLcd, SLOT(display(int)));
+    connect(pGameEngine, SIGNAL(scoreChanged(int)), scoreLcd, SLOT(display(int)));
+    connect(pGameEngine, SIGNAL(clicksChanged(int)), clicksLcd, SLOT(display(int)));
 
 
-    setWindowTitle(tr("Tetrix"));
+    setWindowTitle(tr("Card Matcher"));
     resize(550, 370);
 }
 

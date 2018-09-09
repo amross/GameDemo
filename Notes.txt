@@ -45,3 +45,4 @@ TODO
 Unit tests
 Document
 Error checking and handling
+Game configuration

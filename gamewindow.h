@@ -72,12 +72,9 @@ public:
 private:
     QLabel *createLabel(const QString &text);
 
-    GameBoard *board;
-    GameBoard *board2;
-    QLabel *nextPieceLabel;
+    QLabel *matchLabel;
+    QLCDNumber *clicksLcd;
     QLCDNumber *scoreLcd;
-    QLCDNumber *levelLcd;
-    QLCDNumber *linesLcd;
     QPushButton *startButton;
     QPushButton *quitButton;
     QPushButton *pauseButton;
