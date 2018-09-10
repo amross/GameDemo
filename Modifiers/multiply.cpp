@@ -10,7 +10,6 @@ Multiply::Multiply(int value)
 
 void Multiply::Draw(QPainter& painter) const
 {
-    qInfo( "DRAW Multiply" );
     QFont font = painter.font() ;
     font.setPointSize(50);
     painter.setFont(font);

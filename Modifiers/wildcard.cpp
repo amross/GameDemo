@@ -1,13 +1,14 @@
 #include "wildcard.h"
+#include <QDebug>
 
-Wildcard::Wildcard()
+Wildcard::Wildcard(int value)
+    : fixedScore(value)
 {
 
 }
 
 void Wildcard::Draw(QPainter& painter) const
 {
-    qInfo( "DRAW Plus" );
     QFont font = painter.font() ;
     font.setPointSize(50);
     painter.setFont(font);
@@ -19,7 +20,7 @@ void Wildcard::Draw(QPainter& painter) const
 int Wildcard::Apply(int value) const
 {
     Q_UNUSED(value)
-    return 3;
+    return fixedScore;
 }
 
 Wildcard::operator QString() const

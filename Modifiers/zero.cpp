@@ -9,7 +9,6 @@ Zero::Zero()
 
 void Zero::Draw(QPainter& painter) const
 {
-    qInfo() << "DRAW Zero";
     QFont font = painter.font() ;
     font.setPointSize(50);
     painter.setFont(font);

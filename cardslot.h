@@ -5,6 +5,8 @@
 
 #include <QLabel>
 
+// Represents a card with symbol on face and modifier on back
+// Can be draw into a QObject
 class CardSlot : public QLabel {
     Q_OBJECT
 

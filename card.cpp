@@ -1,50 +1,63 @@
 #include "card.h"
 #include <QDebug>
 #include <QPainter>
+#include <iostream>     // std::cout
+#include <algorithm>    // std::swap
+#include <vector>       // std::vector
 
 Card::Card()
 {
-    qInfo() << "Construct Card";
-}
-
-Card::~Card()
-{
-    qInfo() << "#####Destructor Card";
 
 }
 
-Card::Card(const ColoredSymbol* pFaceSymbol, const Modifier* pModifier)
+Card::Card(const ColoredSymbol* pFaceSymbol, const ModifySymbol* pModifier)
     : faceUp(false)
 {
-    qInfo( "Construct Card from symbol and modifier" );
     desc = "Card: ";
     desc.append(QString(*pFaceSymbol));
     this->pModifier = pModifier;
     this->pFaceSymbol = pFaceSymbol;
 }
 
+// Overloading operator for debugging purposes
+Card::operator QString() const
+{
+    return desc;
+}
+
 void Card::Flip()
 {
-    qInfo() << "Flip: " << desc;
     faceUp = !faceUp;
 }
 
 void Card::FaceUp()
 {
-    qInfo() << "Face up: " << desc;
     faceUp = true;
 }
 
 void Card::FaceDown()
 {
-    qInfo() << "Face down: " << desc;
     faceUp = false;
 }
 
 bool Card::IsFaceUp()
 {
-    qInfo() << "##########Face up?: " << faceUp;
     return faceUp;
+}
+
+Qt::GlobalColor Card::GetColor() const
+{
+    return pFaceSymbol->GetColor();
+}
+
+bool Card::IsSameShape(Card &card)
+{
+    return(typeid(*pFaceSymbol) == typeid(*card.pFaceSymbol));
+}
+
+int Card::ApplyModifier(int value) const
+{
+    return pModifier->Apply(value);
 }
 
 void Card::Draw(QPainter& painter)
@@ -64,10 +77,4 @@ void Card::Draw(QPainter& painter)
         painter.fillRect(shape, brush);
         pModifier->Draw(painter);
     }
-}
-
-// Overloading operator for debugging purposes
-Card::operator QString() const
-{
-    return desc;
 }

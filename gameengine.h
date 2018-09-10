@@ -6,17 +6,21 @@
 
 #include <QFrame>
 
+// Handles game
+// Performs all actions required to run game
+// Manipulates cards based on user input and calculates scores
 class GameEngine : public QObject
 {
     Q_OBJECT
 public:
     GameEngine();
+    GameEngine(const Card &obj);
     virtual ~GameEngine();
     CardSlot *pMatcherSlot;
     QList<CardSlot*> slotList;
 
 private:
-    Deck *pDeck;
+    Deck deck;
     int initialClicks;
     int clicksRemaining;
     int score;

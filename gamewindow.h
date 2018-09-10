@@ -61,7 +61,7 @@ class QPushButton;
 QT_END_NAMESPACE
 class GameBoard;
 
-//! [0]
+// Generates the game bord for laying game on
 class GameWindow : public QWidget
 {
     Q_OBJECT
@@ -79,6 +79,5 @@ private:
     QPushButton *quitButton;
     QPushButton *pauseButton;
 };
-//! [0]
 
 #endif

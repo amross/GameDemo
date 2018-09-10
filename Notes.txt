@@ -21,7 +21,7 @@ A second click will select the card
 selected card will be removed from table and and moved to match check
 Match check will be performed:
     single point awarded for either colour or shape match
-    3 points if exact match
+    4 points if exact match
     -2 points for no match
 Cards bonus modifier will be applied
 Score Updated with new value

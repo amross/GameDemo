@@ -1,6 +1,7 @@
 #include "add.h"
 
 #include <QPainter>
+#include <QDebug>
 
 Add::Add(int value)
     : addValue(value)
@@ -10,7 +11,6 @@ Add::Add(int value)
 
 void Add::Draw(QPainter& painter) const
 {
-    qInfo( "DRAW Plus" );
     QFont font = painter.font() ;
     font.setPointSize(50);
     painter.setFont(font);

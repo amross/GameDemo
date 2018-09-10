@@ -1,16 +1,17 @@
 #ifndef MULTIPLY_H
 #define MULTIPLY_H
 
-#include "modifier.h"
+#include "modifysymbol.h"
 #include <QPainter>
 
-class Multiply : public Modifier
+// Multiply modifier multiplies the current score by a given factor
+class Multiply : public ModifySymbol
 {
 public:
     Multiply(int value);
     ~Multiply() override = default;
     void Draw(QPainter& painter) const override;
-    int Apply(int value) const;
+    int Apply(int value) const override;
 
     operator QString() const override;
 

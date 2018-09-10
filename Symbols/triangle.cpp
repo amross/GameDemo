@@ -5,19 +5,15 @@
 Triangle::Triangle()
     : Triangle(Qt::black)
 {
-    qInfo( "Construct Triangle" );
 }
 
 Triangle::Triangle(Qt::GlobalColor color)
 {
-    qInfo( "Construct Coloured Triangle" );
     SetColor(color);
 }
 
 void Triangle::Draw(QPainter& painter) const
 {
-    qInfo( "DRAW Triangle" );
-
     QPainterPath path;
     QPolygonF triangle;
     int width = painter.device()->width();
@@ -43,16 +39,4 @@ Triangle::operator QString() const
     QString str = "Triangle: ";
     str.append(QString(this->color));
     return str;
-}
-
-bool Triangle::operator==( const ColoredSymbol& obj ) const
-{
-    bool result = false;
-    if((typeid(*this) != typeid(obj))
-        && (this->GetColor() == obj.GetColor()))
-    {
-        result = true;
-    }
-
-    return result;
 }

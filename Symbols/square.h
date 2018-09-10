@@ -11,6 +11,5 @@ public:
     virtual ~Square() override = default;
     void Draw(QPainter& painter) const override;
 
-    virtual bool operator== (const ColoredSymbol& symbol) const override;
     operator QString() const override;
 };

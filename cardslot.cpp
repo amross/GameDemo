@@ -5,6 +5,7 @@
 CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     : QLabel(parent)
 {
+    Q_UNUSED(f);
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
     setScaledContents(true);
@@ -29,7 +30,6 @@ QSize CardSlot::minimumSizeHint() const
 
 void CardSlot::AddCard(Card* pCard)
 {
-    qInfo() << "Add Card: " << *pCard;
     this->pCard = pCard;
 
     QPixmap pix(60, 100);
@@ -52,5 +52,6 @@ Card* CardSlot::RemoveCard()
 
 void CardSlot::mousePressEvent(QMouseEvent* event)
 {
+    Q_UNUSED(event);
     emit clicked(*this);
 }

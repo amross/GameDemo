@@ -1,13 +1,44 @@
 #include "deck.h"
 #include "gameengine.h"
 #include <QDebug>
+#include <Symbols/circle.h>
+#include <Symbols/square.h>
+#include <Symbols/triangle.h>
+#include <Modifiers/add.h>
+#include <Modifiers/multiply.h>
+#include <Modifiers/negate.h>
+#include <Modifiers/wildcard.h>
+#include <Modifiers/zero.h>
 
+static int EvaluateScore(Card& card1, Card& card2);
 
 GameEngine::GameEngine()
 {
+    static const QList<const ColoredSymbol *> shapeList =
+    {
+        new Square(Qt::red),
+        new Circle(Qt::red),
+        new Triangle(Qt::red),
+        new Square(Qt::blue),
+        new Circle(Qt::blue),
+        new Triangle(Qt::blue),
+        new Square(Qt::green),
+        new Circle(Qt::green),
+        new Triangle(Qt::green),
+        new Square(Qt::yellow),
+        new Circle(Qt::yellow),
+        new Triangle(Qt::yellow)
+    };
+    static const QList<const ModifySymbol *> modifierList =
+    {
+        new Add(2),
+        new Multiply(5),
+        new Negate(),
+        new Wildcard(1)
+    };
+    deck = Deck(shapeList, modifierList);
     inProgress = false;
     initialClicks = 20;
-    pDeck =  new Deck();
 }
 
 GameEngine::~GameEngine()
@@ -22,7 +53,8 @@ void GameEngine::Start()
     clicksRemaining = initialClicks;
     ClicksChanged(clicksRemaining);
     ScoreChanged(score);
-    Card* pCard = pDeck->GetCard();
+    deck.Shuffle();
+    Card* pCard = deck.GetCard();
     pCard->FaceUp();
     pMatcherSlot->AddCard(pCard);
     foreach(CardSlot* pSlot, slotList)
@@ -30,9 +62,9 @@ void GameEngine::Start()
         Card* pCard = pSlot->RemoveCard();
         if(pCard != nullptr)
         {
-            pDeck->ReturnCard(pCard);
+            deck.ReturnCard(pCard);
         }
-        pCard = pDeck->GetCard();
+        pCard = deck.GetCard();
         pCard->FaceDown();
         pSlot->AddCard(pCard);
     }
@@ -45,27 +77,28 @@ void GameEngine::CardPicked(CardSlot& cardSlot)
     {
         ClicksChanged(--clicksRemaining);
         Card* pCard = cardSlot.RemoveCard();
-        qInfo() << "Card Picked: " << *pCard;
         if(pCard->IsFaceUp() == false)
         {
-            qInfo() << "Card Flipped: " << *pCard;
             pCard->Flip();
             cardSlot.AddCard(pCard);
         }
         else
         {
-            qInfo() << "Card Evaluate: " << *pCard;
-            pDeck->ReturnCard(pCard);
-            cardSlot.AddCard(pDeck->GetCard());
+            /*  Evaluate score */
+            Card* pMatchCard = pMatcherSlot->RemoveCard();
+            score += EvaluateScore(*pMatchCard, *pCard);
 
-            /*  Select a new card to match  */
-            pCard = pMatcherSlot->RemoveCard();
-            pDeck->ReturnCard(pCard);
-            pCard = pDeck->GetCard();
+            /*  Return both cards back to deck  */
+            deck.ReturnCard(pCard);
+            deck.ReturnCard(pMatchCard);
+
+            /*  Place new cards  */
+            cardSlot.AddCard(deck.GetCard());
+            pCard = deck.GetCard();
             pCard->FaceUp();
             pMatcherSlot->AddCard(pCard);
         }
-        ScoreChanged(++score);
+        ScoreChanged(score);
         if(clicksRemaining <= 0)
         {
             EndGame();
@@ -79,14 +112,32 @@ void GameEngine::EndGame()
     Card* pCard = pMatcherSlot->RemoveCard();
     if(pCard != nullptr)
     {
-        pDeck->ReturnCard(pCard);
+        deck.ReturnCard(pCard);
     }
     foreach(CardSlot* pSlot, slotList)
     {
         Card* pCard = pSlot->RemoveCard();
         if(pCard != nullptr)
         {
-            pDeck->ReturnCard(pCard);
+            deck.ReturnCard(pCard);
         }
     }
+}
+
+static int EvaluateScore(Card& cardToMatch, Card& cardPicked)
+{
+    int score = -2;
+
+    if(cardToMatch.IsSameShape(cardPicked))
+    {
+        score += 3;
+    }
+    if(cardToMatch.GetColor() == cardPicked.GetColor())
+    {
+        score += 3;
+    }
+    score = cardPicked.ApplyModifier(score);
+    qInfo() << "Card match score: " << score;
+
+    return score;
 }

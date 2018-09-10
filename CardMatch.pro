@@ -47,7 +47,6 @@ HEADERS += \
     gameengine.h \
     Symbols/symbol.h \
     Symbols/square.h \
-    Modifiers/modifier.h \
     gamewindow.h \
     cardslot.h \
     Symbols/circle.h \
@@ -57,7 +56,8 @@ HEADERS += \
     Modifiers/multiply.h \
     Modifiers/negate.h \
     Modifiers/zero.h \
-    Modifiers/wildcard.h
+    Modifiers/wildcard.h \
+    Modifiers/modifysymbol.h
 
 FORMS += \
     mainwindow.ui
