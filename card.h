@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Symbols/symbol.h>
+#include <Symbols/coloredSymbol.h>
 #include <Modifiers/modifier.h>
 #include <QObject>
 
@@ -8,17 +8,18 @@ class Card
 {
 public:
     Card();
-    Card(const Symbol &faceSymbol, const Modifier &modifier);
+    ~Card();
+    Card(const ColoredSymbol* pFaceSymbol, const Modifier* pModifier);
     void Flip();
     void FaceUp();
     void FaceDown();
     bool IsFaceUp();
-    void Draw(QPainter& paint);
+    void Draw(QPainter& painter);
     operator QString() const ;
 
 private:
-    Symbol *pFaceSymbol;
-    Modifier modifier;
+    const ColoredSymbol *pFaceSymbol;
+    const Modifier *pModifier;
     bool faceUp;
     QString desc;
 };

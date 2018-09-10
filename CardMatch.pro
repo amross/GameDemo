@@ -29,9 +29,16 @@ SOURCES += \
     scorer.cpp \
     gameengine.cpp \
     Symbols/square.cpp \
-    Modifiers/modifier.cpp \
     gamewindow.cpp \
-    cardslot.cpp
+    cardslot.cpp \
+    Symbols/circle.cpp \
+    Symbols/triangle.cpp \
+    Symbols/coloredSymbol.cpp \
+    Modifiers/add.cpp \
+    Modifiers/multiply.cpp \
+    Modifiers/negate.cpp \
+    Modifiers/zero.cpp \
+    Modifiers/wildcard.cpp
 
 HEADERS += \
     card.h \
@@ -42,7 +49,15 @@ HEADERS += \
     Symbols/square.h \
     Modifiers/modifier.h \
     gamewindow.h \
-    cardslot.h
+    cardslot.h \
+    Symbols/circle.h \
+    Symbols/triangle.h \
+    Symbols/coloredSymbol.h \
+    Modifiers/add.h \
+    Modifiers/multiply.h \
+    Modifiers/negate.h \
+    Modifiers/zero.h \
+    Modifiers/wildcard.h
 
 FORMS += \
     mainwindow.ui

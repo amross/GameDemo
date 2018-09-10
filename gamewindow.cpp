@@ -88,15 +88,15 @@ GameWindow::GameWindow()
             CardSlot *pSlot = new CardSlot();
             layout->addWidget(pSlot, y, x);
             pGameEngine->slotList.append(pSlot);
-            connect(pSlot, SIGNAL(clicked(CardSlot&)), pGameEngine, SLOT(cardPicked(CardSlot&)));
+            connect(pSlot, SIGNAL(clicked(CardSlot&)), pGameEngine, SLOT(CardPicked(CardSlot&)));
         }
     }
     setLayout(layout);
 
-    connect(startButton, SIGNAL(clicked()), pGameEngine, SLOT(start()));
+    connect(startButton, SIGNAL(clicked()), pGameEngine, SLOT(Start()));
     connect(quitButton , SIGNAL(clicked()), qApp, SLOT(quit()));
-    connect(pGameEngine, SIGNAL(scoreChanged(int)), scoreLcd, SLOT(display(int)));
-    connect(pGameEngine, SIGNAL(clicksChanged(int)), clicksLcd, SLOT(display(int)));
+    connect(pGameEngine, SIGNAL(ScoreChanged(int)), scoreLcd, SLOT(display(int)));
+    connect(pGameEngine, SIGNAL(ClicksChanged(int)), clicksLcd, SLOT(display(int)));
 
 
     setWindowTitle(tr("Card Matcher"));

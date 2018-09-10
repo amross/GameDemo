@@ -1,16 +1,20 @@
-#pragma once
+#ifndef CIRCLE_H
+#define CIRCLE_H
 
 #include "coloredSymbol.h"
+#include <QColor>
 #include <QPixmap>
 
-class Square: public ColoredSymbol
+class Circle: public ColoredSymbol
 {
 public:
-    Square();
-    Square(Qt::GlobalColor color);
-    virtual ~Square() override = default;
+    Circle();
+    Circle(Qt::GlobalColor color);
+    virtual ~Circle() override = default;
     void Draw(QPainter& painter) const override;
 
     virtual bool operator== (const ColoredSymbol& symbol) const override;
     operator QString() const override;
 };
+
+#endif // CIRCLE_H

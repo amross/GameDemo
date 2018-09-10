@@ -4,6 +4,7 @@ Demonstrate C++ programming skills
 
 Challenges
 Lack of QT experience with IDE or API
+Rusty C++
 Limited time
 
 Approach

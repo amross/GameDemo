@@ -8,11 +8,11 @@ CardSlot::CardSlot(QWidget* parent, Qt::WindowFlags f)
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
     setScaledContents(true);
-}
-
-CardSlot::~CardSlot()
-{
-
+    QPixmap pix(60, 100);
+    pix.fill(Qt::black);
+    QPainter paint(&pix);
+    setPixmap(pix);
+    pCard = nullptr;
 }
 
 QSize CardSlot::sizeHint() const
@@ -41,7 +41,13 @@ void CardSlot::AddCard(Card* pCard)
 
 Card* CardSlot::RemoveCard()
 {
-    return pCard;
+    QPixmap pix(60, 100);
+    pix.fill(Qt::black);
+    QPainter paint(&pix);
+    setPixmap(pix);
+    Card* pReturn = pCard;
+    pCard = nullptr;
+    return pReturn;
 }
 
 void CardSlot::mousePressEvent(QMouseEvent* event)

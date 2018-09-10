@@ -1,12 +1,9 @@
-#include <Symbols/symbol.h>
-
 #pragma once
 
-class Modifier
+#include <Symbols/symbol.h>
+
+class Modifier : public Symbol
 {
 public:
-    Modifier();
-    ~Modifier();
-    Modifier(const Modifier& from);
-    Symbol& GetSymbol();
+    virtual ~Modifier(){}
 };

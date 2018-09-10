@@ -21,12 +21,13 @@ private:
     int clicksRemaining;
     int score;
     int inProgress;
+    void EndGame();
 
 public slots:
-    void start();
-    void cardPicked(CardSlot& cardSlot);
+    void Start();
+    void CardPicked(CardSlot& cardSlot);
 
 signals:
-    void scoreChanged(int score);
-    void clicksChanged(int score);
+    void ScoreChanged(int score);
+    void ClicksChanged(int score);
 };

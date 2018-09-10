@@ -7,14 +7,20 @@ Card::Card()
     qInfo() << "Construct Card";
 }
 
-Card::Card(const Symbol &faceSymbol, const Modifier &modifier)
+Card::~Card()
+{
+    qInfo() << "#####Destructor Card";
+
+}
+
+Card::Card(const ColoredSymbol* pFaceSymbol, const Modifier* pModifier)
     : faceUp(false)
 {
     qInfo( "Construct Card from symbol and modifier" );
     desc = "Card: ";
-    desc.append(QString(faceSymbol));
-    this->modifier = modifier;
-    pFaceSymbol = faceSymbol.Clone();
+    desc.append(QString(*pFaceSymbol));
+    this->pModifier = pModifier;
+    this->pFaceSymbol = pFaceSymbol;
 }
 
 void Card::Flip()
@@ -37,15 +43,27 @@ void Card::FaceDown()
 
 bool Card::IsFaceUp()
 {
+    qInfo() << "##########Face up?: " << faceUp;
     return faceUp;
 }
 
-void Card::Draw(QPainter& paint)
+void Card::Draw(QPainter& painter)
 {
-    QRectF shape(5, 5, paint.device()->width() - 10, paint.device()->height() - 10);
-    QBrush brush(Qt::white);
-    paint.fillRect(shape, brush);
-    pFaceSymbol->Draw(paint);
+    int cardWidth = painter.device()->width() - 10;
+    int cardHeight = painter.device()->height() - 10;
+    QRectF shape(5, 5, cardWidth, cardHeight);
+    if(faceUp)
+    {
+        QBrush brush(faceUp ? Qt::white : Qt::darkGray);
+        painter.fillRect(shape, brush);
+        pFaceSymbol->Draw(painter);
+    }
+    else
+    {
+        QBrush brush(faceUp ? Qt::white : Qt::darkGray);
+        painter.fillRect(shape, brush);
+        pModifier->Draw(painter);
+    }
 }
 
 // Overloading operator for debugging purposes

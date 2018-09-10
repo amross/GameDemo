@@ -10,7 +10,7 @@ class CardSlot : public QLabel {
 
 public:
     explicit CardSlot(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
-    ~CardSlot() override;
+    ~CardSlot() override = default;
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
     void AddCard(Card* pCard);

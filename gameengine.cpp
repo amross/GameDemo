@@ -8,19 +8,6 @@ GameEngine::GameEngine()
     inProgress = false;
     initialClicks = 20;
     pDeck =  new Deck();
-    pDeck->Shuffle();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    pDeck->GetCard();
-    Qt::black;
 }
 
 GameEngine::~GameEngine()
@@ -28,18 +15,23 @@ GameEngine::~GameEngine()
 
 }
 
-void GameEngine::start()
+void GameEngine::Start()
 {
     qInfo() << "Game started";
     score = 0;
     clicksRemaining = initialClicks;
-    clicksChanged(clicksRemaining);
-    scoreChanged(score);
+    ClicksChanged(clicksRemaining);
+    ScoreChanged(score);
     Card* pCard = pDeck->GetCard();
     pCard->FaceUp();
     pMatcherSlot->AddCard(pCard);
     foreach(CardSlot* pSlot, slotList)
     {
+        Card* pCard = pSlot->RemoveCard();
+        if(pCard != nullptr)
+        {
+            pDeck->ReturnCard(pCard);
+        }
         pCard = pDeck->GetCard();
         pCard->FaceDown();
         pSlot->AddCard(pCard);
@@ -47,11 +39,11 @@ void GameEngine::start()
     inProgress = true;
 }
 
-void GameEngine::cardPicked(CardSlot& cardSlot)
+void GameEngine::CardPicked(CardSlot& cardSlot)
 {
     if(inProgress)
     {
-        clicksChanged(--clicksRemaining);
+        ClicksChanged(--clicksRemaining);
         Card* pCard = cardSlot.RemoveCard();
         qInfo() << "Card Picked: " << *pCard;
         if(pCard->IsFaceUp() == false)
@@ -65,11 +57,36 @@ void GameEngine::cardPicked(CardSlot& cardSlot)
             qInfo() << "Card Evaluate: " << *pCard;
             pDeck->ReturnCard(pCard);
             cardSlot.AddCard(pDeck->GetCard());
+
+            /*  Select a new card to match  */
+            pCard = pMatcherSlot->RemoveCard();
+            pDeck->ReturnCard(pCard);
+            pCard = pDeck->GetCard();
+            pCard->FaceUp();
+            pMatcherSlot->AddCard(pCard);
         }
-        scoreChanged(++score);
+        ScoreChanged(++score);
         if(clicksRemaining <= 0)
         {
-            inProgress = false;
+            EndGame();
+        }
+    }
+}
+
+void GameEngine::EndGame()
+{
+    inProgress = false;
+    Card* pCard = pMatcherSlot->RemoveCard();
+    if(pCard != nullptr)
+    {
+        pDeck->ReturnCard(pCard);
+    }
+    foreach(CardSlot* pSlot, slotList)
+    {
+        Card* pCard = pSlot->RemoveCard();
+        if(pCard != nullptr)
+        {
+            pDeck->ReturnCard(pCard);
         }
     }
 }
